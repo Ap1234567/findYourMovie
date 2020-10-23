@@ -1,0 +1,103 @@
+#search-form{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+h1{
+    text-align: center;
+}
+
+#film{
+    width: 7.5%;
+}
+
+.year-ln{
+    display: flex;
+}
+
+#search{
+    width: 75%;
+}
+
+body{
+    background-image: url("/static/images/movies.jfif");
+    /*opacity: 0.9;*/
+    background-repeat: round;
+}
+
+.headline{
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px;
+    color: black;
+    font-family: 'Lobster', cursive;
+    padding: 3px;
+    display: flexbox;
+}
+
+.info{
+    margin: 2px;
+    padding: 3px;
+}
+
+.presentation{
+    overflow:auto;
+    background-color: rgb(173, 230, 197);
+    border-radius: 10px;
+    padding: 3px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+	height: 80%;
+	
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  	
+	margin: auto;
+}
+
+.poster{
+    float: left;
+    margin: 10px;
+}
+
+#outcome{
+    background-color: palevioletred;
+    padding: 3px;
+    border-radius: 10px;
+    border: 2px solid blue;
+    margin: 5px;
+    min-height: 20px;
+    /*visibility: hidden;
+    display: unset;*/
+}
+
+.multiple{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.one{
+    display: flex;
+    position: relative;
+    padding-right: 20px;
+}
+
+.left{
+    position: relative;
+    float: left;
+}
+
+.right{
+    margin-top:10px;
+}
+
+img{
+    margin: 2px;
+}

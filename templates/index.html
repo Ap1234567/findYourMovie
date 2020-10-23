@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--https://github.com/joshbuchea/HEAD#recommended-minimum-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/my-style.css">
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    <script type="text/javascript">
+      var images = ["/static/images/django.jfif", "/static/images/forrestGump.jfif", "/static/images/rocky.jfif", "/static/images/titanic.jfif"];
+      function changeImage()
+    {
+        var i = 0
+        var inter = setInterval(function(){
+            if(i >= 0)
+            {
+                document.getElementById("frontImage").src = images[i%4];
+                i++;
+            }
+        },3000);
+    }
+
+      function showResult(){
+        document.getElementById("outcome").style.visibility = "visible";
+      }
+    </script>
+  </head>
+  <body onload="changeImage()">
+    <div class="presentation">
+      <div class="info">
+        <h1 class="headline">Find Your Perfect Movie <img id="film" src="/static/images/film.jfif"></h1>
+        <div id="search">
+            <form id="search-form" class="form-inline" method="GET" action="/">
+                <input id="name" name="name" type="text" placeholder="name" class="form-control" autofocus>
+                <div class="year-ln">
+                <label for="year">year: </label>
+                <select name="year" class="form-control">
+                  <option>Choose...</option>
+                  {% for i in range(1888, 2021) %}
+                    <option value="{{i}}">{{ i }}</option>
+                  {% endfor %}
+                </select>
+                </div>
+                <button type="submit" class="alert alert-primary" onclick="showResult()">Search</button>
+            </form>
+        </div>
+        <div id="outcome">
+                {% if not chosen_movie %}
+                <div class="multiple result"> 
+                    {% for movie in movies %}
+                      <a href="/view_image/{{movie['Title']}}"><img src="{{movie['Poster']}}" alt="{{movie['Title'] | title}} image"></a>
+                    {% endfor %}
+                </div>
+                {% else %}
+                  <div class="one result" data-result-id="1">
+                    <div class="left side">
+                      <img class="poster" src="{{chosen_movie['Poster']}}" alt="{{chosen_movie['Title'] | title}} image">
+                    </div>
+                    <div class="right side">
+                    <h3 class="name">{{chosen_movie['Title']}}</h4><br>
+                    <p class="plot">{{chosen_movie['Plot']}}</p>
+                    <p class="other information">
+                      {% for key, value in chosen_movie.items() %}
+                        {% if key in ['Released', 'Runtime', 'Genre', 'Director', 'Actors', 'Awards'] %}
+                          <span>{{key}}: {{value}}</span><br>
+                        {% elif key == 'Ratings' %}
+                          <br><h4>Ratings:</h4>
+                          {% for source in value %}
+                            <span>{{source['Source']}}: {{source['Value']}}</span><br>
+                          {% endfor %}
+                        {% endif %}
+                      {% endfor %}
+                    </p>
+                  </div>
+                </div>
+                {% endif %}
+              </div>
+          </div>
+          <div class="right side">
+            <div class="changingPoster">
+            <img id="frontImage" src="/static/images/django.jfif" height="275px" width="200px" alt="some text"></div>
+        </div>
+    </div>
+  </body>
+</html>
