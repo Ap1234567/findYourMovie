@@ -14,7 +14,7 @@ def main():
     url = "http://www.omdbapi.com"
     #with open('apiKey.txt') as file:
         #apiKey = file.read()
-    apiKey = os.getenv('API_KEY')
+    apiKey = os.getenv("API_KEY")
     params = {'apikey': apiKey, 's': name}
     try:
         params['y'] = int(year)
