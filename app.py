@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import requests
+import os
 
 app = Flask(__name__)
 
@@ -13,7 +14,7 @@ def main():
     url = "http://www.omdbapi.com"
     #with open('apiKey.txt') as file:
         #apiKey = file.read()
-    apiKey = "The API Key"
+    apiKey = os.getenv('API_KEY')
     params = {'apikey': apiKey, 's': name}
     try:
         params['y'] = int(year)
