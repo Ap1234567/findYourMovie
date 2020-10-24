@@ -11,8 +11,9 @@ def main():
     if not name:
         return render_template('index.html', movies={})
     url = "http://www.omdbapi.com"
-    with open('apiKey.txt') as file:
-        apiKey = file.read()
+    #with open('apiKey.txt') as file:
+        #apiKey = file.read()
+    apiKey = "The API Key"
     params = {'apikey': apiKey, 's': name}
     try:
         params['y'] = int(year)
