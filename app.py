@@ -32,8 +32,7 @@ def main():
 def search_by_title():
     id = request.args.__getattribute__("choice")
     url = "http://www.omdbapi.com"
-    with open('apiKey.txt') as file:
-        apiKey = file.read()
+    apiKey = os.getenv("API_KEY")
     params = {'apikey': apiKey, 't': id}
     resp = requests.get(url, params=params)
     resp_json = resp.json()
@@ -43,8 +42,7 @@ def search_by_title():
 @app.route('/view_image/<image_name>')
 def search_by_image(image_name):
     url = "http://www.omdbapi.com"
-    with open('apiKey.txt') as file:
-        apiKey = file.read()
+    apiKey = os.getenv("API_KEY")
     params = {'apikey': apiKey, 't': image_name, 'plot': 'full'}
     resp = requests.get(url, params=params)
     resp_json = resp.json()
